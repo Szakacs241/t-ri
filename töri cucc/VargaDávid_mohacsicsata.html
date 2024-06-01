@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohácsi csata</title>
+    <style>
+        body {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-image: url('kepek/hattermohacs.png');
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border: 1px solid black;
+            background-color: rgba(255, 255, 255, 0.8);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .menu button {
+            font-size: 20px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .content {
+            flex: 1;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid black;
+            display: none;
+            overflow-y: auto;
+            font-size: 18px;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        .map-button {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .map-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map-container img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .szembeallok {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .szembeallok>div {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .szembeallok>div>div {
+            margin-bottom: 20px;
+        }
+
+        .flag {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .menu {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .menu button {
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu">
+            <button onclick="toggleContent('info')">Általános információ</button>
+            <button onclick="toggleContent('szembeallok')">Szemben álló felek</button>
+            <button onclick="toggleContent('magyar')">Magyar haderő</button>
+            <button onclick="toggleContent('torok')">Török haderő</button>
+            <button onclick="toggleContent('kovetkezmenyek')">Következmények</button>
+        </div>
+        <div id="info" class="content visible">
+            <h1>Mohácsi csata</h1>
+            <h2><strong>Időpont</strong>: 1526. augusztus 29.</h2>
+            <h2><strong>Helyszín</strong>: Sátorhely, Magyar Királyság</h2>
+            <h2><strong>Eredmény</strong>: döntő oszmán győzelem</h2>
+            <p>
+                A mohácsi csata, amely 1526. augusztus 29-én zajlott, a Magyar Királyság és az Oszmán Birodalom közötti
+                egyik legfontosabb ütközet volt. Az oszmán sereg, amelyet I. Szulejmán vezetett, döntő győzelmet aratott
+                II. Lajos magyar király serege felett. A csata nemcsak a magyar király életét követelte, hanem a magyar
+                államiság jövőjét is drasztikusan megváltoztatta.
+            </p>
+            <p>
+                A csata következményei közé tartozott a Magyar Királyság három részre szakadása: a Habsburgok által
+                ellenőrzött Nyugati Magyarországra, a török által megszállt középső területekre és az Erdélyi
+                Fejedelemségre, amely viszonylagos autonómiát élvezett, de a török fennhatóság alatt állt.
+            </p>
+            <p>
+                A mohácsi csata a magyar történelem egyik legsúlyosabb vereségeként van számon tartva, és szimbolikus
+                jelentőséggel bír, mint a középkori Magyarország bukásának kezdete.
+            </p>
+        </div>
+        <div id="szembeallok" class="content">
+            <div class="szembeallok">
+                <div>
+                    <div>
+                        <h3><img src="kepek/magyarorszagzaszlo.png" class="flag" alt="Magyarország zászló">Magyar
+                            Királyság</h3>
+                    </div>
+                    <div>
+                        <h3><img src="kepek/csehorszagzaszlo.png" class="flag" alt="Cseh Királyság zászló">Cseh
+                            Királyság</h3>
+                    </div>
+                    <div>
+                        <h3><img src="kepek/nemetromai.png" class="flag" alt="Német-római Birodalom zászló">Német-római
+                            Birodalom</h3>
+                    </div>
+                    <div>
+                        <h3><img src="kepek/bajor.png" class="flag" alt="Bajor Hercegség zászló">Bajor Hercegség</h3>
+                    </div>
+                    <div>
+                        <h3><img src="kepek/papai.png" class="flag" alt="Pápai állam zászló">Pápai állam</h3>
+                    </div>
+                    <div>
+                        <h3><img src="kepek/lengyel.png" class="flag" alt="Lengyel Királyság zászló">Lengyel Királyság
+                        </h3>
+                    </div>
+                    <div>
+                        <h3><img src="kepek/szloven.png" class="flag" alt="Szlovénia szlovének zászló">Szlovénia
+                            szlovének</h3>
+                    </div>
+                    <div>
+                        <h3>Szemben álló erők:</h3>
+                        <p>kb. 25 000– 40 000 fő<br>
+                            magyarok<br>
+                            horvátok<br>
+                            spanyolok<br>
+                            németek<br>
+                            csehek<br>
+                            lengyelek<br>
+                            pápai zsoldosok<br>
+                            85 ágyú</p>
+                    </div>
+                    <div>
+                        <h3>Veszteségek:</h3>
+                        <p>16-24 000 halott<br>
+                            16 zászlósúr<br>
+                            5 püspök<br>
+                            A magyar király</p>
+                    </div>
+                    <div>
+                        <h3>Parancsnokok:</h3>
+                        <p><img src="kepek/magyarorszagzaszlo.png" class="flag" alt="Magyarország zászló">II. Lajos
+                            király †<br>
+                            <img src="kepek/magyarorszagzaszlo.png" class="flag" alt="Magyarország zászló">Báthori
+                            István nádor<br>
+                            <img src="kepek/magyarorszagzaszlo.png" class="flag" alt="Magyarország zászló">Tomori Pál
+                            érsek †<br>
+                            <img src="kepek/magyarorszagzaszlo.png" class="flag" alt="Magyarország zászló">Szapolyai
+                            György gróf †<br>
+                            <img src="kepek/magyarorszagzaszlo.png" class="flag" alt="Magyarország zászló">Bakith Pál
+                            despota<br>
+                            <img src="kepek/magyarorszagzaszlo.png" class="flag" alt="Magyarország zászló">Radics Pál
+                            bán †
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h3><img src="kepek/oszmanbirodalom.png" class="flag" alt="Oszmán Birodalom zászló">Oszmán
+                            Birodalom</h3>
+                        <h3><img src="kepek/krimitatar.png" class="flag" alt="Krími Tatár Kánság zászló">Krími Tatár
+                            Kánság</h3>
+                    </div>
+                    <div>
+                        <h3>Szemben álló erők:</h3>
+                        <p>55 000–75 000 fő<br>
+                            anatóliai<br>
+                            ruméliai<br>
+                            krími tatár<br>
+                            160 ágyú</p>
+                    </div>
+                    <div>
+                        <h3>Veszteségek:</h3>
+                        <p>kb. 1 500 fő</p>
+                    </div>
+                    <div>
+                        <h3>Parancsnokok:</h3>
+                        <p><img src="kepek/oszmanbirodalom.png" class="flag" alt="Oszmán Birodalom zászló">I. Szulejmán
+                            szultán<br>
+                            <img src="kepek/oszmanbirodalom.png" class="flag" alt="Oszmán Birodalom zászló">Malkoçoğlu
+                            Bali bég<br>
+                            <img src="kepek/oszmanbirodalom.png" class="flag" alt="Oszmán Birodalom zászló">Pargali
+                            Ibrahim nagyvezír<br>
+                            <img src="kepek/oszmanbirodalom.png" class="flag" alt="Oszmán Birodalom zászló">Gázi Huszrev
+                            bég
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="magyar" class="content">
+            <h2>Magyar haderő <img src="kepek/magyarorszagzaszlo.png" class="flag" alt="Magyarország zászló"></h2>
+            <p>
+                A magyar sereg, amely így mindössze 24 800 emberből állott, 85 ágyúval volt felszerelve (ebből 53 került
+                használatba), s még néhány horvát hadtest állt rendelkezésre, augusztus 29-én egészen délutánig csatára
+                készen állt. A közhiedelemmel ellentétben a magyar gyalogság annyira jól fel volt szerelve puskákkal,
+                hogy még nyugati összehasonlításban is szokatlan módon rendkívül „tűzerős” seregnek számított a
+                korszakban.
+            </p>
+            <img src="kepek/magyarsereg.png" alt="Magyar Sereg">
+        </div>
+        <div id="torok" class="content">
+            <h2>Török haderő <img src="kepek/oszmanbirodalom.png" class="flag" alt="Oszmán Birodalom zászló"></h2>
+            <p>
+                A török haderő főként az alkalmi irreguláris katonákra támaszkodott. Az Oszmán Birodalom teljes
+                területén a Porta által reguláris haderőként alkalmazott, azaz hivatásos katonák létszáma ugyanis nem
+                haladta meg a 15 - 16 ezer főta 16. század első harmadában. Azonban valószínűtlen, hogy a birodalom az
+                összes rendelkezésre álló professzionális katonáját kockáztatta volna a Porta egyetlen csata érdekében.
+            </p>
+            <img src="kepek/oszmansereg.png" alt="Oszmán Sereg" style="width: 512px; height: 344px;">
+        </div>
+        <div id="kovetkezmenyek" class="content">
+            <h2>Következmények</h2>
+            <p>
+                A mohácsi csata után az ország fővárosa, Buda, védtelen volt. A király és vele együtt a főnemesség
+                jelentős része meghalt, a további védekezés megszervezése nehézségekbe ütközött. Gyakorlatilag csak az
+                erdélyi, kb. 15 ezer fős had maradt ütőképes Szapolyai János vezetésével, de ő nem vállalta a harcot. A
+                török fősereg szeptember 12-én bevonult a védtelenül hagyott Budára (az udvar Pozsonyba menekült), és
+                csapatai elkezdték a környék kifosztását és felperzselését. Pest lakosságát teljesen kiirtották.
+                Komolyabb ellenállást a Pusztamarót mellett összegyűlt kb. 25 ezer fős paraszt- és jobbágysereg
+                tanúsított, amely szekértábort hozott létre. 1526. szeptember 13-án, és a rákövetkező nap is visszaverte
+                a török reguláris katonaságot a szekérvárba húzódott, közel 25 ezer fős paraszthad.
+            </p>
+        </div>
+    </div>
+    <button class="map-button" onclick="toggleMap()">Térkép</button>
+    <div id="mapContainer" class="map-container">
+        <button class="close-button" onclick="toggleMap()">×</button>
+        <img src="kepek/mohacsiterkep.png" alt="Mohácsi csata térképe">
+    </div>
+    <script>
+        function toggleContent(id) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                if (content.id === id) {
+                    content.classList.add('visible');
+                } else {
+                    content.classList.remove('visible');
+                }
+            });
+        }
+        function toggleMap() {
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.style.display = mapContainer.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+
+</body>
+
+</html>
